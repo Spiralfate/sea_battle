@@ -1,0 +1,7 @@
+:host {
+    display: inline-table;
+}
+:host:hover {
+    box-shadow: 0px 0px 50px 10px silver;
+    cursor: pointer;
+}

@@ -1,0 +1,55 @@
+
+<div class="options">
+  <h3>Fields configuration:</h3>
+  <div *ngFor="let option of fieldOptions; let i = index" [attr.data-index]="i">
+    <p>{{ option.name }}: </p> <input type="text" (change)="setNewValue(option)" [(ngModel)]="fieldOptions[i].value" name="i">
+  </div>
+</div>
+<div class="options">
+  <h3>Teams configuration:</h3>
+  <button (click)="addTeam()">Add team</button>
+  <div *ngFor="let team of _config.configuration.teams; let teamIndex = index">
+    <h2>Team {{ teamIndex + 1 }}:</h2>
+    <button (click)="addPlayer(teamIndex)">Add player</button>
+    <div *ngFor="let player of team.players; let playerIndex = index" class="player_details">
+      <label>
+      Human <input 
+              type="radio" 
+              attr.name="type{{teamIndex}}{{playerIndex}}"
+              value="human" 
+              (change)="changePlayerType($event, teamIndex, playerIndex)" 
+              [checked]="check(player.player_type, 'human')">
+      AI <input 
+          id="type{{teamIndex}}{{playerIndex}}"
+          type="radio" 
+          attr.name="type{{teamIndex}}{{playerIndex}}"
+          value="AI" 
+          (change)="changePlayerType($event, teamIndex, playerIndex)"
+          [checked]="check(player.player_type, 'AI')">
+      </label><br />
+      <div *ngIf="check(player.player_type, 'AI')">
+        <p>Difficulty: </p>
+        <select>
+          <option *ngFor="let diff of diffLevels; let i = index" [selected]="diff === player.level">
+            {{ diff }}
+          </option>
+        </select>
+      </div>
+      <div>
+        <p>Specialization: </p>
+        <select>
+          <option *ngFor="let spec of specializations; let i = index" [selected]="spec === player.specialization">
+            {{ spec }}
+          </option>
+        </select>
+      </div>
+      <h4>Ships:</h4>
+      <div *ngFor="let ship of player.ships">
+        Size: <input type="text" [(ngModel)]="ship.size" size="5" >
+        Number: <input type="text" [(ngModel)]="ship.number" size="5"><br />
+      </div>
+      <button (click)="deletePlayer(teamIndex, playerIndex)">Delete player</button>
+    </div>
+    <button (click)="deleteTeam(teamIndex)">Delete team</button>
+  </div>
+</div>

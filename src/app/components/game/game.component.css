@@ -1,0 +1,9 @@
+.team {
+    display: inline-block;
+    margin: 50px;
+}
+
+.player {
+    display: block;
+    margin-bottom: 50px;
+}

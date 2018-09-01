@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ConfigurationService } from './services/configuration/configuration.service'
+import { ProduceShipsService } from './services/produce_ships/produce-ships.service'
 import { FormsModule } from '@angular/forms';
 import {Routes, RouterModule} from '@angular/router';
 
@@ -28,7 +29,7 @@ const appRoutes: Routes =[
     FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [ConfigurationService],
+  providers: [ConfigurationService, ProduceShipsService],
   bootstrap: [AppComponent],
   exports: []
 })

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigurationService } from '../../services/configuration/configuration.service'
-import { FieldComponent } from './components/field/field.component'
+import { FieldComponent } from '../field/field.component'
 import { GameStateService } from '../../services/game_state/game-state.service'
 
 @Component({
@@ -10,16 +10,13 @@ import { GameStateService } from '../../services/game_state/game-state.service'
 })
 export class GameComponent implements OnInit {
 
-  teams = this._state.state.teamsFields
+  teams = []
 
   constructor(private _config: ConfigurationService, private _state: GameStateService) { }
 
   ngOnInit() {
-    this.populate()
-  }
-
-  populate() {
-    this._state.populateFields()
+    console.log('POPULATING FIELDS!')
+    this.teams = this._state.populateFields()
   }
   clean() {
     this._state.cleanFields()

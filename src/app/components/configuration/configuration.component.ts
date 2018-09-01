@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigurationService } from '../../services/configuration/configuration.service'
 import { FormsModule } from '@angular/forms';
+import { Player } from '../../classes/player';
+import { AI } from '../../classes/ai';
 
 @Component({
   selector: 'configuration',
@@ -41,12 +43,9 @@ export class ConfigurationComponent implements OnInit {
     debugger
     let { value } = event.target
     this.teamsOptions[teamIndex].players[playerIndex].player_type = value
-    debugger
-    console.log(this._config)
   }
 
   setNewValue(option) {
-    console.log('Setting new value')
     let { name } = option
     let parent = name.match('_') ? name.slice(0, name.indexOf('_')) : null;
     if (parent) {
@@ -62,19 +61,25 @@ export class ConfigurationComponent implements OnInit {
     this._config.configuration.teams.push({players: []})
   }
   deleteTeam(index) {
-    debugger
     this._config.configuration.teams = this._config.configuration.teams.filter((t, i) => i !== index)
-    console.log(this._config.configuration.teams)
   }
 
   addPlayer(teamIndex) {
     let player_type = Math.random() > 0.5 ? 'human' : 'AI'
-    this._config.configuration.teams[teamIndex].players.push({
-      player_type, 
-      specialization: 'none', 
-      level: 'starter', 
-      ships: [...this._config.configuration.defaultShips]
-    })
+    let parameters = [
+      player_type,
+      'none',
+      [...this._config.configuration.defaultShips]
+    ]
+    player_type === 'AI' ? parameters.push('starter') : ''
+    //this._config.configuration.teams[teamIndex].players.push({
+    //  player_type, 
+      //specialization: 'none', 
+      //level: 'starter', 
+      //ships: [...this._config.configuration.defaultShips]
+    //})
+    let playrToAdd: Player = player_type === 'AI' ? new AI(...parameters) : new Player(...parameters)
+    this._config.configuration.teams[teamIndex].players.push(playrToAdd)
   }
   deletePlayer(teamIndex, playerIndex) { 
     this._config.configuration.teams[teamIndex].players = this._config.configuration.teams[teamIndex].players.filter((pl, i) => i !== playerIndex) 

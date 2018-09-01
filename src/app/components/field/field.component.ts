@@ -24,3 +24,4 @@ export class FieldComponent implements OnInit {
     this.cells = this.battleField
   }
 }
+

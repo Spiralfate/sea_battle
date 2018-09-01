@@ -13,7 +13,6 @@ export class CellComponent implements OnInit {
   constructor(private _config: ConfigurationService) { }
 
   ngOnInit() {
-    debugger
     let size: object = this._config.configuration.cell
     let color
     switch(this.square.value) {

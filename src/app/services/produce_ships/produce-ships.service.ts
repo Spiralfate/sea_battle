@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Coordinates } from '../../classes/coordinates'
+import { Cell } from '../../classes/cell'
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,7 @@ export class ProduceShipsService {
     let currentSize = sizeToFill
     let current
     if (currentArray.length === 0) {
-      current = [[{ coordinates: {x: 0, y: 0}, value: '@' }]]      
+      current = [[new Cell(0, 0, '@', '_')]]    
       if (--currentSize === 0) return current
     } else {
       current = currentArray
@@ -22,7 +24,8 @@ export class ProduceShipsService {
     current.forEach(form => {
       let newForms = []
       this.getFreeFormSurroundings(form).forEach(coors => {
-        newForms.push(form.concat({coordinates: coors, value: '@'}))
+        newForms.push(form.concat(new Cell(coors.x, coors.y, '@', '_')))
+        // newForms.push(form.concat({coordinates: new Coordinates(coors.x, coors.y), value: '@'}))
       })
       nextArray = nextArray.concat(newForms)
     })        

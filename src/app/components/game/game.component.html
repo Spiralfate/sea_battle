@@ -1,11 +1,9 @@
 
-
-<button (click)="populate()">Start</button>
-<button (click)="clean()">Clean</button>
+<button [disabled]="!ready" (click)="start()">Start the game</button>
 
 <div *ngFor="let team of teams; let teamIndex = index" class="team">
   <div *ngFor="let player of team.players; let playerIndex = index" class="player">
-    <field [battleField]="player">      
+    <field [battleField]="player" [teamId]="teamIndex" [playerId]="playerIndex">      
     </field>
   </div>
 </div>

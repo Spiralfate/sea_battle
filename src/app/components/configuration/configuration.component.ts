@@ -40,7 +40,6 @@ export class ConfigurationComponent implements OnInit {
   }
 
   changePlayerType(event, teamIndex, playerIndex) {
-    debugger
     let { value } = event.target
     this.teamsOptions[teamIndex].players[playerIndex].player_type = value
   }
@@ -83,5 +82,11 @@ export class ConfigurationComponent implements OnInit {
   }
   deletePlayer(teamIndex, playerIndex) { 
     this._config.configuration.teams[teamIndex].players = this._config.configuration.teams[teamIndex].players.filter((pl, i) => i !== playerIndex) 
+  }
+  checkIfTeamChosen(teamId) {
+    return this._config.configuration.chosenTeam === teamId
+  }
+  choseTeam(teamId) {
+    this._config.configuration.chosenTeam = teamId
   }
 }

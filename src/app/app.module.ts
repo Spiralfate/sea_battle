@@ -22,7 +22,7 @@ const appRoutes: Routes =[
     CellComponent,
     FieldComponent,
     ConfigurationComponent,
-    GameComponent  
+    GameComponent
   ],
   imports: [
     BrowserModule,

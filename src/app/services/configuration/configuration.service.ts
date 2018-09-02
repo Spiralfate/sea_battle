@@ -7,6 +7,7 @@ export class ConfigurationService {
 
   constructor() { }
   public configuration: any = {
+    chosenTeam: null,
     cell: <object> {
       width: '30',
       height: '30'

@@ -10,6 +10,7 @@
   <button (click)="addTeam()">Add team</button>
   <div *ngFor="let team of _config.configuration.teams; let teamIndex = index">
     <h2>Team {{ teamIndex + 1 }}:</h2>
+    <h3 *ngIf="checkIfTeamChosen(teamIndex)">You will be play for this team</h3>
     <button (click)="addPlayer(teamIndex)">Add player</button>
     <div *ngFor="let player of team.players; let playerIndex = index" class="player_details">
       <label>
@@ -50,6 +51,7 @@
       </div>
       <button (click)="deletePlayer(teamIndex, playerIndex)">Delete player</button>
     </div>
+    <button *ngIf="!checkIfTeamChosen(teamIndex)" (click)="choseTeam(teamIndex)">Chose team</button>
     <button (click)="deleteTeam(teamIndex)">Delete team</button>
   </div>
 </div>

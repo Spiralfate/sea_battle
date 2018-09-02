@@ -1,3 +1,4 @@
 <div class="field" [ngStyle]=style>
-  <cell *ngFor="let square of cells" [square]="square"></cell>
+  <p *ngIf="currentTurn">Current turn</p>
+  <cell *ngFor="let square of cells" [square]="square" [revealed]="revealed" [playerId]="playerId" [teamId]="teamId"></cell>
 </div>
